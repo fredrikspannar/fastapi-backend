@@ -36,3 +36,12 @@ async def get_user(username:str):
     return JSONResponse(content=jsonable_encoder({"message": "User not found"}), status_code=status.HTTP_404_NOT_FOUND)
         
         
+# apparently there is a /public/register route also
+@router.post("/public/register", response_model=User, status_code=status.HTTP_201_CREATED)
+async def add_public_user(new_user:NewUserRequest):
+    user = User(**new_user.model_dump())
+    
+    user.username = user.username.lower() # force lowercase of all usernames
+    
+    USERS.append(user)
+    return user
