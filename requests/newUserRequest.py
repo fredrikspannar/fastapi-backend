@@ -4,11 +4,11 @@ from pydantic import BaseModel, Field
 class NewUserRequest(BaseModel):
     username: str
     email: str
-    role: str
+    role:  Optional[str] = Field(description="App version", default="user")
     enabled: bool
     firstname: str
     lastname: str
-    appversion: Optional[str] = Field(description="App versopm", default="v1"    )
+    appversion: Optional[str] = Field(default="v1")
     
     
     #id: Optional[str] = Field(description="ID is not needed on create", default=None)
@@ -16,3 +16,4 @@ class NewUserRequest(BaseModel):
     #author: str = Field(min_length=2)
     #description: str = Field(min_length=1,max_length=100)
     #rating: int = Field(gt=0, lt=11)
+    
